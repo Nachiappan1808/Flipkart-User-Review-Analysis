@@ -89,7 +89,7 @@ def predict():
         normalizer=pickle.load(Norm_pos)
         Norm_pos.close()
         
-        X_positive_norm = normalizer.transform(np.array(reviewtext_pos))
+        X_positive_norm = normalizer.transform([reviewtext_pos])
         
         reviewtext_neg = get_sentiment(reviewtext, k='negative')
         
@@ -97,7 +97,7 @@ def predict():
         normalizer=pickle.load(Norm_neg)
         Norm_neg.close()
         
-        X_negative_norm = normalizer.transform(np.array(reviewtext_neg))
+        X_negative_norm = normalizer.transform([reviewtext_neg])
         
         reviewtext_neu = get_sentiment(reviewtext, k='neutral')
         
@@ -109,7 +109,7 @@ def predict():
         normalizer=pickle.load(Norm_neu)
         Norm_neu.close()
         
-        X_neutral_norm = normalizer.transform(np.array(reviewtext_neu))
+        X_neutral_norm = normalizer.transform([reviewtext_neu])
         
         reviewtext_com = get_sentiment(reviewtext, k='compound')
         
@@ -117,7 +117,7 @@ def predict():
         normalizer=pickle.load(Norm_com)
         Norm_com.close()
         
-        X_compund_norm = normalizer.transform(np.array(reviewtext_com))
+        X_compund_norm = normalizer.transform([reviewtext_com])
         
         vectorizer=open('Vectorizer.pkl','rb')
         vectorizer_tf=pickle.load(vectorizer)
