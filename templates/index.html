@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sentiment Analysis</title>
+
+    <!-- Font Icon -->
+    <!--<link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="vendor/nouislider/nouislider.min.css">
+
+    
+    <link rel="stylesheet" href="css/style.css">-->
+
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='material-design-iconic-font.min.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='nouislider.min.css') }}">
+     <style>
+     	.select-css {
+	display: block;
+	font-size: 16px;
+	font-family: sans-serif;
+	font-weight: 700;
+	color: #444;
+	line-height: 1.3;
+	padding: .6em 1.4em .5em .8em;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-radius: .5em;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #fff;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+	background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+	background-size: .65em auto, 100%;
+}
+.select-css::-ms-expand {
+	display: none;
+}
+.select-css:hover {
+	border-color: #888;
+}
+.select-css:focus {
+	border-color: #aaa;
+	box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+	box-shadow: 0 0 0 3px -moz-mac-focusring;
+	color: #222;
+	outline: none;
+}
+.select-css option {
+	font-weight:normal;
+}
+Additionally, we recommend adding some rules for right-to-left language support, and a clear disabled state:
+
+
+/* Support for rtl text, explicit support for Arabic and Hebrew */
+*[dir="rtl"] .select-css, :root:lang(ar) .select-css, :root:lang(iw) .select-css {
+	background-position: left .7em top 50%, 0 0;
+	padding: .6em .8em .5em 1.4em;
+}
+
+/* Disabled styles */
+.select-css:disabled, .select-css[aria-disabled=true] {
+	color: graytext;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22graytext%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+}
+.select-css:disabled:hover, .select-css[aria-disabled=true] {
+	border-color: #aaa;
+}
+     </style>
+  <script type="text/javascript">
+  	function sub()
+  	{
+  		//alert(document.getElementById('appincome').value);
+  		//document.getElementById('t1').style.visibility=visible;
+        if(document.getElementById('reviewtext').value=='')
+        {
+            alert("Enter a valid text")
+            document.getElementById('reviewtext').value="";
+            document.getElementById('reviewtext').focus();
+            return false;
+        }
+       
+  	}
+  	function blockSpecialChar(e){
+        var k;
+        document.all ? k = e.keyCode : k = e.which;
+        return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57));
+        }
+  </script>
+</head>
+<body>
+
+    <div class="main">
+
+        <div class="container">
+
+            <div class="signup-content">
+                <div class="signup-img">
+                    <img src="static/Sentiment-Analysis.jpg" alt="">
+                    
+                    
+                    <div class="signup-img-content">
+                       
+                       <!-- <p>while seats are available !</p>-->
+                    </div>
+                    
+                </div>
+                <div class="signup-form">
+                    <h2 style="color: black;text-align: center;">Sentiment Analysis of FlipKart User Reviews</h2>
+                	<form action="{{ url_for('predict')}}" method="post" class="register-form" id="register-form">
+                		<!--<form method="post" class="register-form" id="register-form">-->
+                    <!--<form method="POST" class="register-form" id="register-form">-->
+                        
+                        <div class="appincome">
+                            <label>Review Text</label>
+                           <!-- <div class="price_slider ui-slider ui-slider-horizontal">-->
+                               <!-- <div id="slider-margin"></div>
+                                <span class="appincome" id="appincome" name="appincome"></span>-->
+                                
+		                        <textarea name="reviewtext"  rows="10" cols="50" id="reviewtext" required="required">
+		                        </textarea>
+                            <!--</div>-->
+                        </div>
+                        
+                        
+                        <br>
+                        <br>
+                        <div class="form-submit">
+                            <input type="submit" onclick=sub() value="Predict" class="submit" id="submit" name="submit" />
+                            
+                        </div>
+                    </form>
+                    
+                    <div class="label-flex">
+        <h1 style="color:black;font-size:20px;text-align:center;">Review :</h1> 
+                
+        
+     </div>
+     <div class="label-flex">
+        <h1 style="color:red;font-size:10px;text-align:center;">{{ review }}</h1> 
+                
+        
+     </div>
+                    <div class="label-flex">
+        <h1 style="color:black;font-size:20px;text-align:center;">Type of Review :</h1> 
+                
+        
+     </div>
+                     <div class="label-flex">
+        <h2 style="color:red;font-size:15px;text-align:center;">{{ prediction_text }}</h2>
+                
+        
+     </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+      
+   
+    <!-- JS -->
+  
+
+
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='nouislider.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='jquery.validate.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='wNumb.js') }}"></script>
+    <script src="{{ url_for('static', filename='additional-methods.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
