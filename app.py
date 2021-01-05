@@ -89,7 +89,7 @@ def predict():
         normalizer=pickle.load(Norm_pos)
         Norm_pos.close()
         
-        X_positive_norm = normalizer.transform(np.array(reviewtext_pos).reshape(1,-1)).todense()
+        X_positive_norm = normalizer.transform(np.array(reviewtext_pos))
         
         reviewtext_neg = get_sentiment(reviewtext, k='negative')
         
@@ -97,7 +97,7 @@ def predict():
         normalizer=pickle.load(Norm_neg)
         Norm_neg.close()
         
-        X_negative_norm = normalizer.transform(np.array(reviewtext_neg).reshape(1,-1)).todense()
+        X_negative_norm = normalizer.transform(np.array(reviewtext_neg))
         
         reviewtext_neu = get_sentiment(reviewtext, k='neutral')
         
@@ -109,7 +109,7 @@ def predict():
         normalizer=pickle.load(Norm_neu)
         Norm_neu.close()
         
-        X_neutral_norm = normalizer.transform(np.array(reviewtext_neu).reshape(1,-1)).todense()
+        X_neutral_norm = normalizer.transform(np.array(reviewtext_neu))
         
         reviewtext_com = get_sentiment(reviewtext, k='compound')
         
@@ -117,12 +117,12 @@ def predict():
         normalizer=pickle.load(Norm_com)
         Norm_com.close()
         
-        X_compund_norm = normalizer.transform(np.array(reviewtext_com).reshape(1,-1)).todense()
+        X_compund_norm = normalizer.transform(np.array(reviewtext_com))
         
         vectorizer=open('Vectorizer.pkl','rb')
         vectorizer_tf=pickle.load(vectorizer)
         vectorizer.close()
-        X_tfidf = vectorizer_tf.transform([reviewtext]).todense()
+        X_tfidf = vectorizer_tf.transform([reviewtext])
         #data = np.array([[reviewtext]])
         
         X_tf=hstack((X_tfidf,X_positive_norm,X_negative_norm,X_neutral_norm,X_compund_norm)).tocsr()
