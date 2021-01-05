@@ -3,6 +3,7 @@ import pickle
 import numpy as np
 import re
 from scipy.sparse import hstack
+import nltk
 
 app = Flask(__name__)
 
