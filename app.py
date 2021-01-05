@@ -122,7 +122,7 @@ def predict():
         vectorizer=open('Vectorizer.pkl','rb')
         vectorizer_tf=pickle.load(vectorizer)
         vectorizer.close()
-        X_tfidf = vectorizer_tf.transform([reviewtext])
+        X_tfidf = vectorizer_tf.transform([reviewtext]).todense()
         #data = np.array([[reviewtext]])
         
         X_tf=hstack((X_tfidf,X_positive_norm,X_negative_norm,X_neutral_norm,X_compund_norm)).tocsr()
