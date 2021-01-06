@@ -84,40 +84,40 @@ def predict():
         reviewtext=  remove_htmltags(reviewtext)
         reviewtext = preprocess(reviewtext)
         
-        reviewtext_pos = get_sentiment(reviewtext, k='positive')
+        X_positive_norm = get_sentiment(reviewtext, k='positive')
         Norm_pos=open('Norm_pos.pkl','rb')
         normalizer=pickle.load(Norm_pos)
         Norm_pos.close()
         
-        X_positive_norm = normalizer.transform([[reviewtext_pos]])
+       # X_positive_norm = normalizer.transform([[reviewtext_pos]])
         
-        reviewtext_neg = get_sentiment(reviewtext, k='negative')
+        X_negative_norm = get_sentiment(reviewtext, k='negative')
         
         Norm_neg=open('Norm_neg.pkl','rb')
         normalizer=pickle.load(Norm_neg)
         Norm_neg.close()
         
-        X_negative_norm = normalizer.transform([[reviewtext_neg]])
+       # X_negative_norm = normalizer.transform([[reviewtext_neg]])
         
         reviewtext_neu = get_sentiment(reviewtext, k='neutral')
         
 
-        reviewtext_neu=0
+        X_neutral_norm=0
         
         
         Norm_neu=open('Norm_neu.pkl','rb')
         normalizer=pickle.load(Norm_neu)
         Norm_neu.close()
         
-        X_neutral_norm = normalizer.transform([[reviewtext_neu]])
+       # X_neutral_norm = normalizer.transform([[reviewtext_neu]])
         
-        reviewtext_com = get_sentiment(reviewtext, k='compound')
+        X_compund_norm = get_sentiment(reviewtext, k='compound')
         
         Norm_com=open('Norm_com.pkl','rb')
         normalizer=pickle.load(Norm_com)
         Norm_com.close()
         
-        X_compund_norm = normalizer.transform([[reviewtext_com]])
+        #X_compund_norm = normalizer.transform([[reviewtext_com]])
         
         vectorizer=open('Vectorizer.pkl','rb')
         vectorizer_tf=pickle.load(vectorizer)
