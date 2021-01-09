@@ -131,6 +131,15 @@ def predict():
         classifier=pickle.load(log)
         log.close()
         
+        posit=[]
+        negat=[]
+
+        for j in reviewtext.split(' '):
+            if(get_sentiment(j, k='compound')>0):
+                posit.append(j)
+            if(get_sentiment(j, k='compound')<0):
+                negat.append(j)
+        
   
         
         my_prediction = classifier.predict(X_tf) 
@@ -143,7 +152,7 @@ def predict():
             val="Critical Review"
     
 
-    return render_template('index.html', prediction_text=val,review=reviews)
+    return render_template('index.html', prediction_text=val,review=reviews,,posi=posit,nega=negat)
 
 
 if __name__ == "__main__":
