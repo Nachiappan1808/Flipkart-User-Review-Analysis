@@ -152,7 +152,7 @@ def predict():
             val="Critical Review"
     
 
-    return render_template('index.html', prediction_text=val,review=reviews,,posi=posit,nega=negat)
+    return render_template('index.html', prediction_text=val,review=reviews,posi=posit,nega=negat)
 
 
 if __name__ == "__main__":
